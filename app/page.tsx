@@ -6,10 +6,10 @@ export default function Home() {
   const titleRef = useRef(null);
   const subtitleRef = useRef(null);
   const sectionRef = useRef(null);
-  const contentRef = useRef<any>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    // Animate title and subtitle on load
+ 
     gsap.from([titleRef.current, subtitleRef.current], {
       opacity: 0,
       y: 50,
@@ -18,7 +18,7 @@ export default function Home() {
       ease: "power3.out",
     });
 
-    // Animate main content section
+
     gsap.from(sectionRef.current, {
       opacity: 0,
       duration: 1,
@@ -26,15 +26,17 @@ export default function Home() {
       ease: "power3.out",
     });
 
-    // Animate each paragraph in the content
-    gsap.from(contentRef.current.children, {
-      opacity: 0,
-      y: 20,
-      duration: 0.8,
-      stagger: 0.2,
-      delay: 1,
-      ease: "power3.out",
-    });
+  
+    if (contentRef.current) {
+      gsap.from(contentRef.current.children, {
+        opacity: 0,
+        y: 20,
+        duration: 0.8,
+        stagger: 0.2,
+        delay: 1,
+        ease: "power3.out",
+      });
+    }
   }, []);
 
   return (
